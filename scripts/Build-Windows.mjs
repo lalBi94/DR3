@@ -6,7 +6,7 @@ import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 const distribution = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const project = resolve(distribution, '..')
 const runtime = join(distribution, 'build/runtime')
-const version = process.argv[2] ?? '1.0.0'
+const version = process.argv[2] ?? JSON.parse(await readFile(join(project, 'package.json'), 'utf8')).version
 if (!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(version)) throw new Error('Version attendue : X.Y.Z')
 const output = join(distribution, `build/Dress3-${version}-windows`)
 const require = createRequire(join(project, 'package.json'))
@@ -98,7 +98,18 @@ Fermer Dress 3, extraire le nouveau ZIP dans un nouveau dossier et lancer le nou
 Ne jamais effacer ou remplacer dress3_data. Faire une sauvegarde avant une mise à jour.
 La préférence d'emplacement existante est conservée par le stockage système Neutralinojs.
 Comparer le SHA-256 du ZIP avec celui de update.json via Get-FileHash -Algorithm SHA256.
-Il n'y a pas encore de recherche ni d'installation automatique des mises à jour.
+
+MISE À JOUR INTÉGRÉE (DEPUIS LA VERSION 1.1.0)
+Ouvrir Paramètres, puis Mises à jour de Dress 3.
+La recherche est lancée à l'ouverture de cette page ; le bouton permet de la relancer.
+Si une version plus récente est disponible, confirmer puis cliquer sur Mettre à jour et redémarrer.
+L'archive est téléchargée depuis GitHub, vérifiée (taille et SHA-256), puis l'application redémarre.
+Le remplacement est automatique après confirmation. Aucune installation silencieuse au démarrage.
+Internet et PowerShell Windows sont requis pour cette opération, pas pour utiliser le dressing.
+Le dossier d'installation doit être accessible en écriture, sans élévation administrateur.
+Les fichiers existants de l'application sont sauvegardés pour restauration en cas d'échec.
+Un arrêt forcé de Windows pendant le remplacement peut exiger une restauration manuelle.
+Les rapports de mise à jour sont conservés dans le dossier temporaire dress3-update-<identifiant>.
 
 FONCTIONNEMENT
 Application locale, sauf le bulletin météo qui utilise Open-Meteo.

@@ -14,7 +14,7 @@ Télécharger la dernière version Windows x64 depuis [GitHub Releases](https://
 - Chaque release contient une archive Windows, ses notices de licences et `update.json` : version, plateforme, URL de téléchargement, taille et SHA-256.
 - Manifeste de la dernière version stable : `https://github.com/lalBi94/DR3/releases/latest/download/update.json` (disponible après la première publication).
 - Les préversions utilisent une version telle que `1.0.0-beta.1` et ne remplacent pas la dernière version stable.
-- Le téléchargement et l'installation restent manuels à ce stade. Aucun vérificateur de mise à jour n'est encore intégré dans Dress 3.
+- Depuis **v1.1.0**, Paramètres vérifie les releases stables et propose **Mettre à jour et redémarrer** : téléchargement, SHA-256 et remplacement automatique après confirmation. Les versions v1.0.x doivent être remplacées manuellement une dernière fois pour recevoir ce mécanisme.
 - Les fichiers persistants `dress3_data` doivent rester séparés de l'application et ne doivent jamais être remplacés lors d'une mise à jour.
 
 ## Publier une version
@@ -23,7 +23,7 @@ Pour préparer une version depuis le projet de développement privé :
 
 ```powershell
 pnpm exec vite build --outDir DR3/build/runtime/web-dist
-node DR3/scripts/Build-Windows.mjs 1.0.1
+node DR3/scripts/Build-Windows.mjs 1.1.0
 ```
 
 Le script prend la version `X.Y.Z` en argument et prépare le conteneur Neutralinojs de production (inspecteur désactivé), le binaire Windows et les notices tierces sous `DR3/build/Dress3-X.Y.Z-windows`. Il ne copie aucune donnée utilisateur. Tester ce dossier puis le compresser en ZIP avant publication. Incrémenter le dernier nombre pour un correctif (par exemple `1.0.0` → `1.0.1`).
@@ -31,7 +31,7 @@ Le script prend la version `X.Y.Z` en argument et prépare le conteneur Neutrali
 Depuis ce dossier, dans PowerShell :
 
 ```powershell
-.\scripts\Publish-Release.ps1 -Version 1.0.0 -Archive C:\releases\Dress3-windows.zip -Notes C:\releases\notes.md
+.\scripts\Publish-Release.ps1 -Version 1.1.0 -Archive C:\releases\Dress3-windows.zip -Notes C:\releases\notes.md
 ```
 
 Pour une préversion, ajouter `-Prerelease`. Le script utilise `GITHUB_TOKEN` ou les identifiants du gestionnaire Git, sans les écrire dans le dépôt. Il crée une release en brouillon, charge l'archive et son manifeste, puis publie seulement après réussite des transferts. En cas d'échec, le brouillon reste disponible pour diagnostic.
