@@ -10,7 +10,8 @@ $repository = 'lalBi94/DR3'
 if ($Version -notmatch '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z]+(?:[.-][0-9A-Za-z]+)*)?$') { throw 'Version attendue : X.Y.Z ou X.Y.Z-beta.1.' }
 if ($Version.Contains('-') -and -not $Prerelease) { throw 'Une version suffixée nécessite -Prerelease.' }
 $archivePath = (Resolve-Path -LiteralPath $Archive).Path
-$notesText = Get-Content -LiteralPath $Notes -Raw -Encoding UTF8
+$notesPath = (Resolve-Path -LiteralPath $Notes).Path
+$notesText = [IO.File]::ReadAllText($notesPath, [Text.Encoding]::UTF8)
 if ([string]::IsNullOrWhiteSpace($notesText)) { throw 'Les notes de version sont obligatoires.' }
 if ([IO.Path]::GetExtension($archivePath) -ne '.zip') { throw 'Une archive ZIP Windows est attendue.' }
 
