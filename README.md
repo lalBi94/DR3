@@ -6,7 +6,7 @@ Ce dépôt public sert uniquement à distribuer les versions compilées. Le dép
 
 ## Téléchargements
 
-Les versions disponibles seront publiées dans [GitHub Releases](https://github.com/lalBi94/DR3/releases). Aucune version distribuée n'est encore publiée.
+Télécharger la dernière version Windows x64 depuis [GitHub Releases](https://github.com/lalBi94/DR3/releases/latest). Extraire tout le ZIP puis lancer `Dress3.exe` ; conserver `resources.neu` à côté de l'exécutable.
 
 ## Versionnement et mises à jour
 
@@ -18,6 +18,15 @@ Les versions disponibles seront publiées dans [GitHub Releases](https://github.
 - Les fichiers persistants `dress3_data` doivent rester séparés de l'application et ne doivent jamais être remplacés lors d'une mise à jour.
 
 ## Publier une version
+
+Pour préparer la v1 depuis le projet de développement privé :
+
+```powershell
+pnpm exec vite build --outDir DR3/build/runtime/web-dist
+node DR3/scripts/Build-Windows.mjs
+```
+
+Le script prépare le conteneur Neutralinojs de production (version 1.0.0, inspecteur désactivé), le binaire Windows et les notices tierces sous `DR3/build/Dress3-1.0.0-windows`. Il ne copie aucune donnée utilisateur. Tester ce dossier puis le compresser en ZIP avant publication. Les scripts de préparation sont pour l'instant spécifiques à la v1 ; adapter explicitement la version pour une future livraison.
 
 Depuis ce dossier, dans PowerShell :
 

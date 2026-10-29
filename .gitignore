@@ -6,3 +6,7 @@
 !/scripts/
 /scripts/*
 !/scripts/Publish-Release.ps1
+!/scripts/Build-Windows.mjs
+!/releases/
+/releases/*
+!/releases/v1.0.0.md
