@@ -1,0 +1,8 @@
+# Seuls les documents et scripts de distribution sont suivis.
+*
+!/.gitignore
+!/README.md
+!/CREDITS.md
+!/scripts/
+/scripts/*
+!/scripts/Publish-Release.ps1
