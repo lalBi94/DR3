@@ -19,14 +19,14 @@ Télécharger la dernière version Windows x64 depuis [GitHub Releases](https://
 
 ## Publier une version
 
-Pour préparer la v1 depuis le projet de développement privé :
+Pour préparer une version depuis le projet de développement privé :
 
 ```powershell
 pnpm exec vite build --outDir DR3/build/runtime/web-dist
-node DR3/scripts/Build-Windows.mjs
+node DR3/scripts/Build-Windows.mjs 1.0.1
 ```
 
-Le script prépare le conteneur Neutralinojs de production (version 1.0.0, inspecteur désactivé), le binaire Windows et les notices tierces sous `DR3/build/Dress3-1.0.0-windows`. Il ne copie aucune donnée utilisateur. Tester ce dossier puis le compresser en ZIP avant publication. Les scripts de préparation sont pour l'instant spécifiques à la v1 ; adapter explicitement la version pour une future livraison.
+Le script prend la version `X.Y.Z` en argument et prépare le conteneur Neutralinojs de production (inspecteur désactivé), le binaire Windows et les notices tierces sous `DR3/build/Dress3-X.Y.Z-windows`. Il ne copie aucune donnée utilisateur. Tester ce dossier puis le compresser en ZIP avant publication. Incrémenter le dernier nombre pour un correctif (par exemple `1.0.0` → `1.0.1`).
 
 Depuis ce dossier, dans PowerShell :
 

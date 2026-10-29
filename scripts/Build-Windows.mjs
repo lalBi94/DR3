@@ -6,14 +6,16 @@ import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 const distribution = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const project = resolve(distribution, '..')
 const runtime = join(distribution, 'build/runtime')
-const output = join(distribution, 'build/Dress3-1.0.0-windows')
+const version = process.argv[2] ?? '1.0.0'
+if (!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(version)) throw new Error('Version attendue : X.Y.Z')
+const output = join(distribution, `build/Dress3-${version}-windows`)
 const require = createRequire(join(project, 'package.json'))
 const neuRequire = createRequire(require.resolve('@neutralinojs/neu/package.json'))
 const asar = neuRequire('@electron/asar')
 
 await mkdir(output, { recursive: true })
 const config = JSON.parse(await readFile(join(project, 'neutralino.config.json'), 'utf8'))
-config.version = '1.0.0'
+config.version = version
 config.applicationIcon = 'assets/icon.png'
 config.modes.window.icon = 'assets/icon.png'
 config.modes.window.enableInspector = false
@@ -79,8 +81,8 @@ await writeFile(metadataPath, JSON.stringify({ ...config, applicationIcon: join(
 neuRequire('./src/constants.js').files.configFile = metadataPath
 await neuRequire('./src/modules/exepatch.js').patchWindowsExecutable(join(output, 'Dress3.exe'))
 await cp(join(distribution, 'CREDITS.md'), join(output, 'CREDITS.md'))
-await writeFile(join(output, 'VERSION.txt'), '1.0.0\n')
-await writeFile(join(output, 'LIRE-MOI.txt'), `Dress 3 — 1.0.0 — Windows x64
+await writeFile(join(output, 'VERSION.txt'), `${version}\n`)
+await writeFile(join(output, 'LIRE-MOI.txt'), `Dress 3 — ${version} — Windows x64
 Bilal Boudjemline — Threadlock Systems
 
 INSTALLATION
