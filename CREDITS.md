@@ -15,6 +15,7 @@ Les propositions des agents restent des contributions d'assistance, et non une g
 ## Technologies
 
 - **React / React DOM** : interface utilisateur.
+- **Lucide React — Lucide Icons and Contributors**, avec des icônes issues de **Feather — Cole Bemis** : pictogrammes locaux, notices ISC et MIT incluses dans l'archive.
 - **Vite**, **Rolldown** et **pnpm** : développement, compilation et gestion des dépendances.
 - **JavaScript / JSX, CSS et Canvas** : interface, styles et traitement local des images.
 - **Neutralinojs** et **WebView2** sous Windows : application desktop et capacités natives.

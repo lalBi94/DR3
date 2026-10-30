@@ -64,7 +64,7 @@ async function collectLicenses(name, fromRequire) {
   const localRequire = createRequire(packagePath)
   for (const dependency of Object.keys(metadata.dependencies ?? {})) await collectLicenses(dependency, localRequire)
 }
-for (const name of ['react', 'react-dom', '@neutralinojs/lib', '@huggingface/transformers']) {
+for (const name of ['react', 'react-dom', '@neutralinojs/lib', '@huggingface/transformers', 'lucide-react']) {
   await collectLicenses(name, require)
 }
 await cp(join(runtime, 'web-dist/licenses'), join(licenses, 'image-processing'), { recursive: true })
@@ -112,7 +112,7 @@ Un arrêt forcé de Windows pendant le remplacement peut exiger une restauration
 Les rapports de mise à jour sont conservés dans le dossier temporaire dress3-update-<identifiant>.
 
 FONCTIONNEMENT
-Application locale, sauf le bulletin météo qui utilise Open-Meteo.
+Application locale, sauf la météo Open-Meteo et les mises à jour GitHub depuis Paramètres.
 Les modèles de détourage sont inclus pour fonctionner sans téléchargement.
 Les crédits et les licences tierces sont fournis avec cette archive.
 `)

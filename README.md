@@ -23,7 +23,7 @@ Pour préparer une version depuis le projet de développement privé :
 
 ```powershell
 pnpm exec vite build --outDir DR3/build/runtime/web-dist
-node DR3/scripts/Build-Windows.mjs 1.1.0
+node DR3/scripts/Build-Windows.mjs 1.2.0
 ```
 
 Le script prend la version `X.Y.Z` en argument et prépare le conteneur Neutralinojs de production (inspecteur désactivé), le binaire Windows et les notices tierces sous `DR3/build/Dress3-X.Y.Z-windows`. Il ne copie aucune donnée utilisateur. Tester ce dossier puis le compresser en ZIP avant publication. Incrémenter le dernier nombre pour un correctif (par exemple `1.0.0` → `1.0.1`).
@@ -31,7 +31,7 @@ Le script prend la version `X.Y.Z` en argument et prépare le conteneur Neutrali
 Depuis ce dossier, dans PowerShell :
 
 ```powershell
-.\scripts\Publish-Release.ps1 -Version 1.1.0 -Archive C:\releases\Dress3-windows.zip -Notes C:\releases\notes.md
+.\scripts\Publish-Release.ps1 -Version 1.2.0 -Archive C:\releases\Dress3-windows.zip -Notes C:\releases\notes.md
 ```
 
 Pour une préversion, ajouter `-Prerelease`. Le script utilise `GITHUB_TOKEN` ou les identifiants du gestionnaire Git, sans les écrire dans le dépôt. Il crée une release en brouillon, charge l'archive et son manifeste, puis publie seulement après réussite des transferts. En cas d'échec, le brouillon reste disponible pour diagnostic.
